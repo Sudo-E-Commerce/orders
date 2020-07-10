@@ -9,6 +9,7 @@ App::booted(function() {
 		Route::get('orders/{order_id}/accepts', 'OrderController@accepts')->name('orders.accepts');
 		Route::get('orders/{order_id}/success', 'OrderController@success')->name('orders.success');
 		Route::get('orders/{order_id}/denined', 'OrderController@denined')->name('orders.denined');
+		Route::get('orders/embed_history/{order_history_id}', 'OrderController@embedHistory')->name('orders.embed_history');
 		// Khách hàng
 		Route::resource('customers', 'CustomerController');
 		Route::post('customers/exports', 'CustomerController@exports')->name('customers.exports');

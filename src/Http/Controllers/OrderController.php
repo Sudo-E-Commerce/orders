@@ -246,6 +246,57 @@ class OrderController extends AdminController
         }
         // Đưa mảng về các biến có tên là các key của mảng
         extract($requests->all(), EXTR_OVERWRITE);
+
+        // Lịch sử thay đổi cập nhật trước khi update bất kỳ thông gì
+        $data_history = [];
+        $customer_history = Customer::where('phone', $phone)->first();
+        $data_history['old'] = [
+            'customers' => [
+                'name'      => (string)$customer_history->name ?? '',
+                'phone'     => (string)$customer_history->phone ?? '',
+                'email'     => (string)$customer_history->email ?? '',
+                'address'   => (string)$customer_history->address ?? '',
+            ],
+            'orders' => [
+                'note' => (string)$data_edit->note,
+                'payment_method' => (int)$data_edit->payment_method,
+            ],
+        ];
+        $data_history['new'] = [
+            'customers' => [
+                'name'      => (string)$name,
+                'phone'     => (string)$phone,
+                'email'     => (string)$email,
+                'address'   => (string)$address,
+            ],
+            'orders' => [
+                'note' => (string)$note,
+                'payment_method' => (int)$payment_method,
+            ],
+        ];
+        $detail_history = OrderDetail::where('order_id', $id)->get();
+        if (isset($detail_history) && !empty($detail_history)) {
+            foreach ($detail_history as $value) {
+                $order_detail = [
+                    'order_id'      => (int)$id,
+                    'product_id'    => (int)$value->product_id ?? 0,
+                    'price'         => (int)$value->price ?? 0,
+                    'quantity'      => (int)$value->quantity ?? 0,
+                ];
+                $data_history['old']['products'][] = $order_detail;
+            }
+        }
+        if (isset($products) && !empty($products)) {
+            foreach ($products as $value) {
+                $order_detail = [
+                    'order_id'      => (int)$id,
+                    'product_id'    => (int)$value['id'] ?? 0,
+                    'price'         => (int)$value['price'] ?? 0,
+                    'quantity'      => (int)$value['quantity'] ?? 0,
+                ];
+                $data_history['new']['products'][] = $order_detail;
+            }
+        }
         // Khách hàng
         $customers = [
             'name'      => $name,
@@ -263,6 +314,9 @@ class OrderController extends AdminController
             'updated_at'        => date('Y-m-d H:i:s'),
         ];
         \DB::table('orders')->where('id', $id)->update($orders);
+        if ($data_history['new'] != $data_history['old']) {
+            OrderHistory::add($id, 'order_change', $data_history);
+        }
         // Chi tiết đơn hàng
         if (isset($products) && !empty($products)) {
             OrderDetail::where('order_id', $id)->delete();
@@ -307,15 +361,15 @@ class OrderController extends AdminController
                 'type' => 'danger',
                 'message' => 'Core::admin.role.no_permission',
             ]);
-        } else {
-            $note = $requests->admin_note;
-            $order_id = $requests->order_id;
-            // Không có note sẽ không ghi
-            if (!empty($note)) {
-                OrderHistory::add($order_id, 'admin_note', $note);
-            }
-            return redirect(route('admin.orders.show', $order_id));
         }
+        // 
+        $note = $requests->admin_note;
+        $order_id = $requests->order_id;
+        // Không có note sẽ không ghi
+        if (!empty($note)) {
+            OrderHistory::add($order_id, 'admin_note', $note);
+        }
+        return redirect(route('admin.orders.show', $order_id));
     }
 
     /**
@@ -414,6 +468,25 @@ class OrderController extends AdminController
                 'type' => 'danger',
                 'message' => 'Chỉ chuyển được khi đơn đang được tiếp nhận.',
             ]);
+        }
+    }
+
+    public function embedHistory(Request $requests) {
+        // Không có quyền sửa thì trả về trang chủ
+        if (!checkRole($this->table_name.'_index')) {
+            exit(__('Core::admin.role.no_permission'));
+        }
+        // Lịch sử
+        $history_id = $requests->order_history_id;
+        // Chi tiết lịch sử
+        $order_history = OrderHistory::where('id', $history_id)->first();
+        // Nếu có dữ liệu thì mới hiển thị ra view
+        if (isset($order_history->data) && !empty($order_history->data)) {
+            $data = json_decode(base64_decode($order_history->data), true);
+            $payment_method = $this->payment_method;
+            return view('Order::admin.orders.embed_history', compact('data', 'payment_method'));
+        } else {
+            exit(__('Lịch sử trống'));
         }
     }
 

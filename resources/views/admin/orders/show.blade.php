@@ -50,19 +50,19 @@
 						<tbody>
 							<tr>
 								<th class="p-2" style="width: 200px;">@lang('Tên')</th>
-								<td class="p-2">{{$customers->name ?? __('Không cung cấp')}}</td>
+								<td class="p-2">{{!empty($customers->phone) ? $customers->name : __('Không cung cấp')}}</td>
 							</tr>
 							<tr>
 								<th class="p-2" style="width: 200px;">@lang('Điện thoại')</th>
-								<td class="p-2">{{$customers->phone ?? __('Không cung cấp')}}</td>
+								<td class="p-2">{{!empty($customers->phone) ? $customers->phone : __('Không cung cấp')}}</td>
 							</tr>
 							<tr>
 								<th class="p-2" style="width: 200px;">@lang('Email')</th>
-								<td class="p-2">{{$customers->email ?? __('Không cung cấp')}}</td>
+								<td class="p-2">{{!empty($customers->email) ? $customers->email : __('Không cung cấp')}}</td>
 							</tr>
 							<tr>
 								<th class="p-2" style="width: 200px;">@lang('Địa chỉ')</th>
-								<td class="p-2">{{$customers->address ?? __('Không cung cấp')}}</td>
+								<td class="p-2">{{!empty($customers->address) ? $customers->address : __('Không cung cấp')}}</td>
 							</tr>
 							<tr>
 								<th class="p-2" style="width: 200px;">@lang('Ghi chú tại đơn')</th>
@@ -267,17 +267,17 @@
 											</div>
 								        @break
 
-								        @case('order_change') 
+								        @case('order_change')
 											<div>
 												<i class="fas fa-edit bg-info"></i>
 												<div class="timeline-item">
 													<span class="time"><i class="fas fa-clock"></i> {{formatTime($value->time, 'H:i:s')}}</span>
 													<h3 class="timeline-header">
 														<a href="{{ route('admin.admin_users.edit', $value->admin_user_id) }}" target="_blank">{{$admin_users[$value->admin_user_id] ?? ''}}</a> 
-														@lang('đã cập nhật chi tiết đơn hàng') 
+														@lang('đã chỉnh sửa chi tiết đơn hàng') 
 													</h3>
 													<div class="timeline-footer">
-														<a class="btn btn-info btn-sm">@lang('Click xem chi tiết')</a>
+														<a class="btn btn-info btn-sm" data-order_history="{{ route('admin.orders.embed_history', $value->id) }}">@lang('Click xem chi tiết')</a>
 													</div>
 												</div>
 											</div>
@@ -315,6 +315,32 @@
 				@lang('Từ chối')
 			</a>
 		@endif
+		<a href="{{ route('admin.orders.index') }}" class="btn btn-sm btn-danger">
+			<i class="fa fa-sign-out-alt mr-1"></i> 
+			@lang('Form::form.action.exit')
+		</a>
 	</div>
 </div>
+<div class="modal fade" id="order_history">
+	<div class="modal-dialog" style="max-width: 50%;">
+		<form action="{{ route('admin.ajax.comments.quick_reply', $value->id) }}" method="POST">
+			<div class="modal-content">
+				<div class="modal-body p-0" style="height: calc(100vh - 60px);">
+					<iframe src="" frameborder="0" class="float-left" style="width: 100%; height: 100%;"></iframe>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+<script>
+	$(document).ready(function() {
+		$('body').on('click', '*[data-order_history]', function() {
+			$('#order_history').find('iframe').attr('src', $(this).data('order_history'));
+			$('#order_history').modal();
+		});
+		$('#order_history').on('hidden.bs.modal', function() {
+			$(this).find('iframe').attr('src', '');
+		})
+	});
+</script>
 @endsection
