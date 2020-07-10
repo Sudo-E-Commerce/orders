@@ -1,0 +1,29 @@
+{
+    "name": "sudo/order",
+    "description": "Order and Shopping Cart Sudo package",
+    "type": "library",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Nguyen Viet Hieu",
+            "email": "hieunvph04479@gmail.com"
+        }
+    ],
+    "require": {
+        "bumbummen99/shoppingcart": "^2.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "Sudo\\Order\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Sudo\\Order\\Providers\\OrderServiceProvider"
+            ],
+            "aliases": {}
+        }
+    }
+}
