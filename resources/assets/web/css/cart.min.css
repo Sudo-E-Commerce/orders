@@ -83,6 +83,7 @@
 	width: 100%;
 	float: left;
 	clear: both;
+    overflow: auto;
 }
 .cart-table {
 	width: 100%;
@@ -91,6 +92,7 @@
 	border: 1px solid #cccccc;
 	border-spacing: 0px;
     border-collapse: collapse;
+    min-width: 768px;
 }
 .cart-table th,
 .cart-table td {
@@ -345,4 +347,32 @@
 #cart-notificate .btn-close:hover {
 	background: #ad0f0f;
     transition: 0.2s;
+}
+
+@media only screen and (min-width: 1200px) {
+    
+}
+
+@media only screen and (max-width: 1199px) {
+    
+}
+
+@media only screen and (max-width: 991px) {
+    
+}
+
+@media only screen and (max-width: 767px) {
+    
+}
+
+@media only screen and (max-width: 479px) {
+    .cart-checkout {
+        text-align: left;
+    }
+    .cart-checkout a {
+        margin-left: 0px;
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
+    }
 }

@@ -380,3 +380,33 @@ textarea.checkout-form__control {
 	background: #ad0f0f;
     transition: 0.2s;
 }
+
+@media only screen and (max-width: 1199px) {
+    .checkout-form {
+		width: 50%;
+		margin-bottom: 15px;
+	}
+	.checkout-info {
+		width: 50%;
+		margin-bottom: 15px;
+		padding: 0 0 0 15px;
+	}
+	.checkout-submit {
+		width: 100%;
+	}
+}
+
+@media only screen and (max-width: 767px) {
+    .checkout-form {
+		width: 100%;
+		margin-bottom: 15px;
+	}
+	.checkout-info {
+		width: 100%;
+		margin-bottom: 15px;
+		padding: 0;
+	}
+	.checkout-submit {
+		width: 100%;
+	}
+}
