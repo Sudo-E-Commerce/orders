@@ -1,6 +1,6 @@
 <?php
 
-namespace Sudo\Order\Http\Controllers;
+namespace Sudo\Order\Http\Controllers\Admin;
 use Sudo\Base\Http\Controllers\AdminController;
 
 use Illuminate\Http\Request;
@@ -30,11 +30,7 @@ class OrderController extends AdminController
             4 => 'Thành công',
         ];
 
-        $this->payment_method = [
-            1 => 'Ship COD',
-            2 => 'Tiền mặt',
-            3 => 'Chuyển khoản ATM',
-        ];
+        $this->payment_method = config('SudoOrder.payment_method');
     }
     /**
      * Display a listing of the resource.
@@ -121,6 +117,7 @@ class OrderController extends AdminController
             'total_price'       => $total_price,
         ];
         $order_id = Order::add($orders);
+        \Sudo\Order\Models\OrderHistory::add($order_id, 'admin_create');
         if (isset($products) && !empty($products)) {
             foreach ($products as $value) {
                 $order_detail = [
@@ -160,7 +157,7 @@ class OrderController extends AdminController
         // Lấy bản ghi
         $order = $this->models->where('id', $id)->first();
         // Khách hàng
-        $customers = Customer::where('id', $order->id)->first();
+        $customers = Customer::where('id', $order->customer_id)->first();
         // Thông tin sản phẩm
         $order_details = OrderDetail::where('order_id', $order->id)->get();
         // Lịch sử hành động của đơn hàng
@@ -189,11 +186,11 @@ class OrderController extends AdminController
         if ($data_edit->status != 2) {
             return redirect(route('admin.orders.show', $id))->with([
                 'type' => 'success',
-                'message' => __('Để sửa đơn hàng phải ở trạng thái "Đã tiếp nhận"')
+                'message' => __('Để sửa đơn hàng phải ở trạng thái Đã tiếp nhận')
             ]);
         }
         // Khách hàng
-        $customers = Customer::where('id', $data_edit->id)->first();
+        $customers = Customer::where('id', $data_edit->customer_id)->first();
         // Thông tin sản phẩm
         $order_details = OrderDetail::where('order_id', $data_edit->id)->get();
         $product_details = [];
@@ -241,7 +238,7 @@ class OrderController extends AdminController
         if ($data_edit->status != 2) {
             return redirect(route('admin.orders.show', $id))->with([
                 'type' => 'success',
-                'message' => __('Để sửa đơn hàng phải ở trạng thái "Đã tiếp nhận"')
+                'message' => __('Để sửa đơn hàng phải ở trạng thái Đã tiếp nhận')
             ]);
         }
         // Đưa mảng về các biến có tên là các key của mảng

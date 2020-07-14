@@ -88,7 +88,7 @@
 								<th class="p-2">@lang('Tên sản phẩm')</th>
 								<th class="p-2" style="width: 150px;">@lang('Giá')</th>
 								<th class="p-2" style="width: 100px;">@lang('Số lượng')</th>
-								<th class="p-2" style="width: 150px;">@lang('Tổng tiền')</th>
+								<th class="p-2" style="width: 150px;">@lang('Tổng giá')</th>
 							</tr>
 							@foreach ($data['old']['products']??[] as $key => $value)
 								@php
@@ -99,7 +99,7 @@
 									@if ($key == 0)
 									<th class="p-2" rowspan="{{count($data['old']['products'] ?? [])}}">@lang('Cũ')</th>
 									@endif
-									<td class="p-2"><strong>{{$products[$value['product_id']??0] ?? 'Không xác định'}}</strong></td>
+									<td class="p-2"><strong>{{$products[$value['product_id']??0] ?? __('Không xác định')}}</strong></td>
 									<td class="p-2">{{ formatPrice($price) }}</td>
 									<td class="p-2">{{ $quantity }}</td>
 									<td class="p-2">{{ formatPrice($price*$quantity) }}</td>
@@ -118,7 +118,7 @@
 									@if ($key == 0)
 									<th class="p-2" rowspan="{{count($data['new']['products'] ?? [])}}">@lang('Mới')</th>
 									@endif
-									<td class="p-2"><strong>{{$products[$value['product_id']??0] ?? 'Không xác định'}}</strong></td>
+									<td class="p-2"><strong>{{$products[$value['product_id']??0] ?? __('Không xác định')}}</strong></td>
 									<td class="p-2">{{ formatPrice($price) }}</td>
 									<td class="p-2">{{ $quantity }}</td>
 									<td class="p-2">{{ formatPrice($price*$quantity) }}</td>

@@ -1,6 +1,6 @@
 <?php
 App::booted(function() {
-	$namespace = 'Sudo\Order\Http\Controllers';
+	$namespace = 'Sudo\Order\Http\Controllers\Admin';
 	
 	Route::namespace($namespace)->name('admin.')->prefix(config('app.admin_dir'))->middleware(['web', 'auth-admin'])->group(function() {
 		// Đơn hàng
@@ -13,9 +13,5 @@ App::booted(function() {
 		// Khách hàng
 		Route::resource('customers', 'CustomerController');
 		Route::post('customers/exports', 'CustomerController@exports')->name('customers.exports');
-	});
-
-	Route::namespace($namespace)->name('admin.ajax.')->prefix(config('app.admin_dir').'/ajax')->middleware(['web', 'auth-admin'])->group(function() {
-		// Route::post('suggest_products', 'OrderController@suggestProduct')->name('suggest_products');
 	});
 });

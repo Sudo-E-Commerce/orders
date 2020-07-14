@@ -22,6 +22,10 @@ class Customer extends BaseModel {
 		// Dùng số điện thoại để kiểm tra
 		// Nếu có thì cập nhật, không có thì thêm mới
 		if ($check_exist == null) {
+			// Không có số điện thoại thì trả về 0
+			if (empty($data->phone)) {
+				return 0;
+			}
 			$customer_id = Customer::insertGetId([
 				'name' 		=> $data->name,
 				'phone' 	=> $data->phone,

@@ -1,5 +1,4 @@
 <?php 
-
 // Chuyển id thành mã đơn hàng
 function getOrderCode($number) {
 	$code = '';

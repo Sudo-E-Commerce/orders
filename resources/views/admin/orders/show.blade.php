@@ -201,7 +201,7 @@
 												<div class="timeline-item">
 													<span class="time"><i class="fas fa-clock"></i> {{formatTime($value->time, 'H:i:s')}}</span>
 													<h3 class="timeline-header">
-														<a href="javascript:;">@lang('Khách')</a> 
+														<a href="javascript:;">@lang('Khách hàng')</a> 
 														@lang('đã tạo đơn hàng')
 													</h3>
 												</div>

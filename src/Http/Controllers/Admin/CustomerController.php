@@ -1,6 +1,6 @@
 <?php
 
-namespace Sudo\Order\Http\Controllers;
+namespace Sudo\Order\Http\Controllers\Admin;
 use Sudo\Base\Http\Controllers\AdminController;
 
 use Illuminate\Http\Request;

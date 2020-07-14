@@ -1,0 +1,122 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.cart-popup {
+	position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 10001;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    visibility: hidden;
+}
+.cart-popup.open {
+    opacity: 1;
+    visibility: visible;
+    transition: 0.2s;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+.cart-popup__close {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 10001;
+}
+.cart-popup__dialog {
+    max-width: 600px;
+    width: calc(100% - 30px);
+    float: left;
+    margin: 30px auto;
+    position: relative;
+    z-index: 10002;
+}
+.cart-popup__header {
+    width: 100%;
+    float: left;
+    clear: both;
+    position: relative;
+    background: #ffffff;
+    border-bottom: 1px solid #cccccc;
+}
+.cart-popup__header__text {
+	padding: 10px 10px;
+    background: #0b597a;
+    color: #ffffff;
+    font-weight: bold;
+}
+.cart-popup__header__close {
+    position: absolute;
+    top: calc(-25px / 2);
+    right: calc(-25px / 2);
+    cursor: pointer;
+}
+.cart-popup__header__close i {
+    width: 25px;
+    height: 25px;
+    border-radius: 25px;
+    background: #1b1bca;
+    line-height: 25px;
+    text-align: center;
+    color: #ffffff;
+    transition: 0.2s;
+}
+.cart-popup__header__close i:hover {
+    background: #0000ff;
+    transition: 0.2s;
+}
+.cart-popup__footer {
+    width: 100%;
+    float: left;
+    clear: both;
+    position: relative;
+    background: #ffffff;
+    padding: 10px;
+    border-top: 1px solid #cccccc;
+}
+.cart-popup__footer .btn-close,
+.cart-popup__footer .btn-gotocart {
+	width: calc(50% - 5px);
+	text-align: center;
+	padding: 10px;
+	transition: 0.2s;
+	color: #ffffff;
+	border-radius: 5px;
+}
+.cart-popup__footer .btn-close {
+	float: left;
+	background:  #22b2e6;
+}
+.cart-popup__footer .btn-close:hover {
+	background: #207b9c;
+	transition: 0.2s;
+}
+.cart-popup__footer .btn-gotocart {
+	float: right;
+	background:  #0b597a;
+}
+.cart-popup__footer .btn-gotocart:hover {
+	background: #09374a;
+	transition: 0.2s;
+}
+.cart-popup__body {
+	width: 100%;
+    float: left;
+    clear: both;
+	position: relative;
+    background: #ffffff;
+    padding: 10px;
+}
+.cart-popup__body__notificate {
+	line-height: 25px;
+}

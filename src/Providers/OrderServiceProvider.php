@@ -11,7 +11,7 @@ class OrderServiceProvider extends ServiceProvider
      * alias => path
      */
     private $configFile = [
-        //
+        'SudoOrder' => 'SudoOrder.php'
     ];
 
     /**
@@ -55,8 +55,11 @@ class OrderServiceProvider extends ServiceProvider
         $moduleName = 'Order';
 
         // boot route
-        if (File::exists($modulePath."routes/routes.php")) {
-            $this->loadRoutesFrom($modulePath."/routes/routes.php");
+        if (File::exists($modulePath."routes/admin.php")) {
+            $this->loadRoutesFrom($modulePath."/routes/admin.php");
+        }
+        if (File::exists($modulePath."routes/app.php")) {
+            $this->loadRoutesFrom($modulePath."/routes/app.php");
         }
 
         // boot migration
@@ -96,13 +99,13 @@ class OrderServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole()) {
             $assets = [
-                //
+                __DIR__.'/../../resources/assets' => public_path('platforms/orders'),
             ];
             $config = [
-                //
+                __DIR__.'/../../config/SudoOrder.php' => config_path('SudoOrder.php'),
             ];
             $view = [
-                //
+                // __DIR__.'/../../resources/views/shopping_carts' => base_path('themes/resources/views/shopping_carts'),
             ];
             $all = array_merge($assets, $config, $view);
             // Chạy riêng

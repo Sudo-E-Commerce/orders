@@ -5,6 +5,27 @@ namespace Sudo\Order\Models;
 use Sudo\Base\Models\BaseModel;
 
 class Order extends BaseModel {
+
+	public function queryAdmin($show_data, $requests) {
+		if (isset($requests->order_id) && $requests->order_id != '') {
+			$id = getOrderDecode($requests->order_id);
+			$show_data = $show_data->where('id', $id);
+		}
+
+		if (isset($requests->customer_name) || isset($requests->customer_phone)) {
+			$show_data = $show_data->join('customers', 'customers.id', 'orders.customer_id');
+
+			if (isset($requests->customer_name) && $requests->customer_name != '') {
+				$show_data = $show_data->where('customers.name', $requests->customer_name);
+			}
+			if (isset($requests->customer_phone) && $requests->customer_phone != '') {
+				$show_data = $show_data->where('customers.phone', $requests->customer_phone);
+			}
+
+			$show_data = $show_data->select('orders.*');
+		}
+		return $show_data;
+	}
 	
 	public static function add($data) {
 		$data = json_decode(json_encode(removeScriptArray($data)));
@@ -18,7 +39,6 @@ class Order extends BaseModel {
 			'created_at' 		=> $time,
 			'updated_at' 		=> $time,
 		]);
-		\Sudo\Order\Models\OrderHistory::add($order_id, 'admin_create');
 		return $order_id;
 	}
 
