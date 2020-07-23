@@ -1,5 +1,6 @@
 {
 	"Đơn hàng":"Order",
+	"Chi tiết đơn hàng":"Order Detail",
 	"Khách hàng":"Customer",
 	"Mã đơn hàng":"Order ID",
 	"Tên người đặt":"Customer name",
@@ -24,6 +25,7 @@
 	"Lịch sử đơn hàng":"Order history",
 	"Cũ":"Old",
 	"Mới":"New",
+	"Không cung cấp":"Not provided",
 
 	"Đơn hàng mới":"New order",
 	"Đã tiếp nhận":"Received",

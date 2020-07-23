@@ -26,7 +26,7 @@
 						</tr>
 						<tr>
 							<th class="p-2" style="width: 200px;">@lang('Hình thức thanh toán')</th>
-							<td class="p-2">{{ $payment_method[$order->payment_method] ?? '' }}</td>
+							<td class="p-2">@lang($payment_method[$order->payment_method] ?? '')</td>
 						</tr>
 						<tr>
 							<th class="p-2" style="width: 200px;">@lang('Trạng thái')</th>
