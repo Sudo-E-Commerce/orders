@@ -115,5 +115,5 @@
 		'require_payment_method' => __('Vui lòng chọn một hình thức thanh toán!'),
 	]));
 @endphp
-<div class="variable" data-value="{{$variable ?? ''}}" ></div>
+<div class="lang_orders" data-value="{{$variable ?? ''}}" ></div>
 <script src="{{ asset('platforms/orders/web/js/checkout.min.js') }}"></script>
