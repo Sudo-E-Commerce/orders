@@ -162,7 +162,7 @@ class OrderController extends AdminController
         $order_details = OrderDetail::where('order_id', $order->id)->get();
         // Lịch sử hành động của đơn hàng
         $order_histories = OrderHistory::getOrderHistory($order->id);
-
+        
         return view('Order::admin.orders.show', compact(
             'payment_method',
             'admin_users',

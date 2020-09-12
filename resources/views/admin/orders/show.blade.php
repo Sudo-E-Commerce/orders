@@ -323,13 +323,11 @@
 </div>
 <div class="modal fade" id="order_history">
 	<div class="modal-dialog" style="max-width: 50%;">
-		<form action="{{ route('admin.ajax.comments.quick_reply', $value->id) }}" method="POST">
-			<div class="modal-content">
-				<div class="modal-body p-0" style="height: calc(100vh - 60px);">
-					<iframe src="" frameborder="0" class="float-left" style="width: 100%; height: 100%;"></iframe>
-				</div>
+		<div class="modal-content">
+			<div class="modal-body p-0" style="height: calc(100vh - 60px);">
+				<iframe src="" frameborder="0" class="float-left" style="width: 100%; height: 100%;"></iframe>
 			</div>
-		</form>
+		</div>
 	</div>
 </div>
 <script>
