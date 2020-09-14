@@ -50,7 +50,7 @@
 						<tbody>
 							<tr>
 								<th class="p-2" style="width: 200px;">@lang('Tên')</th>
-								<td class="p-2">{{!empty($customers->phone) ? $customers->name : __('Không cung cấp')}}</td>
+								<td class="p-2">{{!empty($customers->name) ? $customers->name : __('Không cung cấp')}}</td>
 							</tr>
 							<tr>
 								<th class="p-2" style="width: 200px;">@lang('Điện thoại')</th>
