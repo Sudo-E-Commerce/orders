@@ -49,7 +49,7 @@ class ShoppingCartController extends Controller
             \Log::error($e);
             return [
                 'status' => 2,
-                'message' => __('Core::admin.ajax_fail'),
+                'message' => __('Translate::admin.ajax_fail'),
             ];
         }
     }
@@ -82,7 +82,7 @@ class ShoppingCartController extends Controller
             \Log::error($e);
             return [
                 'status' => 2,
-                'message' => __('Core::admin.ajax_fail'),
+                'message' => __('Translate::admin.ajax_fail'),
             ];
         }
     }
@@ -117,7 +117,7 @@ class ShoppingCartController extends Controller
             \Log::error($e);
             return [
                 'status' => 2,
-                'message' => __('Core::admin.ajax_fail'),
+                'message' => __('Translate::admin.ajax_fail'),
             ];
         }
     }

@@ -135,7 +135,7 @@ class OrderController extends AdminController
         }
         return redirect(route('admin.'.$this->table_name.'.'.$redirect, $order_id))->with([
             'type' => 'success',
-            'message' => __('Core::admin.update_success')
+            'message' => __('Translate::admin.update_success')
         ]);
     }
 
@@ -333,7 +333,7 @@ class OrderController extends AdminController
         }
         return redirect(route('admin.'.$this->table_name.'.'.$redirect, $id))->with([
             'type' => 'success',
-            'message' => __('Core::admin.update_success')
+            'message' => __('Translate::admin.update_success')
         ]);
     }
 
@@ -356,7 +356,7 @@ class OrderController extends AdminController
         if (!checkRole($this->table_name.'_edit')) {
             return redirect(route('admin.home'))->with([
                 'type' => 'danger',
-                'message' => 'Core::admin.role.no_permission',
+                'message' => 'Translate::admin.role.no_permission',
             ]);
         }
         // 
@@ -377,7 +377,7 @@ class OrderController extends AdminController
         if (!checkRole($this->table_name.'_edit')) {
             return redirect(route('admin.home'))->with([
                 'type' => 'danger',
-                'message' => 'Core::admin.role.no_permission',
+                'message' => 'Translate::admin.role.no_permission',
             ]);
         }
         // ID đơn hàng
@@ -410,7 +410,7 @@ class OrderController extends AdminController
         if (!checkRole($this->table_name.'_edit')) {
             return redirect(route('admin.home'))->with([
                 'type' => 'danger',
-                'message' => 'Core::admin.role.no_permission',
+                'message' => 'Translate::admin.role.no_permission',
             ]);
         }
         // ID đơn hàng
@@ -443,7 +443,7 @@ class OrderController extends AdminController
         if (!checkRole($this->table_name.'_edit')) {
             return redirect(route('admin.home'))->with([
                 'type' => 'danger',
-                'message' => 'Core::admin.role.no_permission',
+                'message' => 'Translate::admin.role.no_permission',
             ]);
         }
         // ID đơn hàng
@@ -471,7 +471,7 @@ class OrderController extends AdminController
     public function embedHistory(Request $requests) {
         // Không có quyền sửa thì trả về trang chủ
         if (!checkRole($this->table_name.'_index')) {
-            exit(__('Core::admin.role.no_permission'));
+            exit(__('Translate::admin.role.no_permission'));
         }
         // Lịch sử
         $history_id = $requests->order_history_id;

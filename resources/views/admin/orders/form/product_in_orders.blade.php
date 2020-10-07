@@ -55,13 +55,13 @@
 							</td>
 							<td>{{ formatPrice($quantity*$price, null) }}</td>
 							<td class="text-center table-action">
-					            <a class="delete-record" href="javascript:;" data-delete_item data-message="@lang('Table::table.delete_question')"><i class="fas fa-trash text-red"></i></a>
+					            <a class="delete-record" href="javascript:;" data-delete_item data-message="@lang('Translate::table.delete_question')"><i class="fas fa-trash text-red"></i></a>
 					        </td>
 						</tr>
 					@endforeach
 				@else
 					<tr>
-						<td colspan="6" class="text-center"><strong>@lang('Table::table.no_record')</strong></td>
+						<td colspan="6" class="text-center"><strong>@lang('Translate::table.no_record')</strong></td>
 					</tr>
 				@endif
 			</tbody>
@@ -85,7 +85,7 @@
 				if ($('*[data-product_item]').length-1 == 0) {
 					$(this).closest('tbody').html(`
 						<tr>
-							<td colspan="6" class="text-center"><strong>@lang('Table::table.no_record')</strong></td>
+							<td colspan="6" class="text-center"><strong>@lang('Translate::table.no_record')</strong></td>
 						</tr>
 					`);
 				}
@@ -178,7 +178,7 @@
 						</td>
 						<td>${formatPrice(price)}</td>
 						<td class="text-center table-action">
-				            <a class="delete-record" href="javascript:;" data-delete_item data-message="@lang('Table::table.delete_question')"><i class="fas fa-trash text-red"></i></a>
+				            <a class="delete-record" href="javascript:;" data-delete_item data-message="@lang('Translate::table.delete_question')"><i class="fas fa-trash text-red"></i></a>
 				        </td>
 					</tr>
 				`);

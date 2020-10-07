@@ -317,7 +317,7 @@
 		@endif
 		<a href="{{ route('admin.orders.index') }}" class="btn btn-sm btn-danger">
 			<i class="fa fa-sign-out-alt mr-1"></i> 
-			@lang('Form::form.action.exit')
+			@lang('Translate::form.action.exit')
 		</a>
 	</div>
 </div>

@@ -35,9 +35,9 @@ class CustomerController extends AdminController
         $listdata->search('status', 'Trạng thái', 'array', config('app.status'));
         $listdata->searchBtn('Export', route('admin.customers.exports'), 'primary', 'fas fa-file-excel');
         // Build các button hành động
-        $listdata->btnAction('status', 1, __('Table::table.active'), 'success', 'fas fa-edit');
-        $listdata->btnAction('status', 0, __('Table::table.no_active'), 'info', 'fas fa-window-close');
-        $listdata->btnAction('delete', -1, __('Table::table.trash'), 'danger', 'fas fa-trash');
+        $listdata->btnAction('status', 1, __('Translate::table.active'), 'success', 'fas fa-edit');
+        $listdata->btnAction('status', 0, __('Translate::table.no_active'), 'info', 'fas fa-window-close');
+        $listdata->btnAction('delete', -1, __('Translate::table.trash'), 'danger', 'fas fa-trash');
         // Build bảng
         $listdata->add('name', 'Tên', 1);
         $listdata->add('phone', 'Điện thoại', 1);
@@ -94,7 +94,7 @@ class CustomerController extends AdminController
         dd(route('admin.'.$this->table_name.'.'.$redirect, $id));
         return redirect(route('admin.'.$this->table_name.'.'.$redirect, $id))->with([
             'type' => 'success',
-            'message' => __('Core::admin.create_success')
+            'message' => __('Translate::admin.create_success')
         ]);
     }
 
@@ -155,7 +155,7 @@ class CustomerController extends AdminController
         // Điều hướng
         return redirect(route('admin.'.$this->table_name.'.'.$redirect, $id))->with([
             'type' => 'success',
-            'message' => __('Core::admin.update_success')
+            'message' => __('Translate::admin.update_success')
         ]);
     }
 
